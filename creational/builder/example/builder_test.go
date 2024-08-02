@@ -1,7 +1,6 @@
 package builder
 
 import (
-	"fmt"
 	"testing"
 	"time"
 )
@@ -12,18 +11,18 @@ func Test_Builder(t *testing.T) {
 	offerTemplate := controller.createTemplate(dtoWithCompany("offer"))
 	display(offerTemplate)
 
-	invoiceTemplate := controller.createTemplate(dtoWithCompany("invoice"))
-	display(invoiceTemplate)
+	// invoiceTemplate := controller.createTemplate(dtoWithCompany("invoice"))
+	// display(invoiceTemplate)
     
 	offerTemplateWithoutCompany := controller.createTemplate(dtoWithoutCompany("offer"))
 	display(offerTemplateWithoutCompany)
     
-	invoiceTemplateWithoutCompany := controller.createTemplate(dtoWithoutCompany("invoice"))
-	display(invoiceTemplateWithoutCompany)
+	// invoiceTemplateWithoutCompany := controller.createTemplate(dtoWithoutCompany("invoice"))
+	// display(invoiceTemplateWithoutCompany)
 }
 
-func display(template string) {
-	fmt.Println(template)
+func display(template iTemplate) {
+	template.print()
 }
 
 func dtoWithCompany(documentType string) TemplateDto {
