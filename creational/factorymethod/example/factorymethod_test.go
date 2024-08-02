@@ -14,6 +14,6 @@ func Test_FactorMethod(t *testing.T) {
 	controller.change(&EnglishTranslatorFactory{})
 	fmt.Println(controller.translate("Witaj Świecie"))
 
-	// controller.change("Spanish")
-	// fmt.Println(controller.translate("Witaj Świecie"))
+	controller.change(&SpanishTranslatorFactory{})
+	fmt.Println(controller.translate("Witaj Świecie"))
 }
