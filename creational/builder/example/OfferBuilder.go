@@ -7,7 +7,7 @@ type OfferBuilder struct {
 	title string
 	creationDate time.Time
 	contentDraft string
-	company Company
+	company *Company
 }
 
 func (builder *OfferBuilder) build() iTemplate {
@@ -40,7 +40,7 @@ func (builder *OfferBuilder) withContentDraft(contentDraft string) {
 }
 
 func (builder *OfferBuilder) withCompany(name string, address string, representative string) {
-	builder.company = Company{
+	builder.company = &Company{
 		name: name,
 		address: address,
 		representative: representative,

@@ -20,10 +20,13 @@ func (controller *DocumentTemplateController) createTemplate(dto TemplateDto) iT
 	return builder.build()
 }
 
-func (controller *DocumentTemplateController) createBuilder(documentType string) iTemplateBuilder {
-	if (documentType == "offer") {
+func (controller *DocumentTemplateController) createBuilder(builderType string) iTemplateBuilder {
+	switch builderType {
+	case "offer":
 		return &OfferBuilder{}
-	} else {
+	case "invoice":
+		return &InvoiceBuilder{}
+	default:
 		return nil
 	}
 }
