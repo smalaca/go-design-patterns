@@ -1,7 +1,6 @@
 package prototype
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -15,6 +14,6 @@ func Test_Prototype(t *testing.T) {
 	display(invoiceTemplate)
 }
 
-func display(template string) {
-	fmt.Println(template)
+func display(template iTemplate) {
+	template.print()
 }
