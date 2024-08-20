@@ -5,25 +5,24 @@ import (
 )
 
 func Test_Facade(t *testing.T) {
-	smsGateway := SmsGateway{}
-	mailClient := MailClient{} 
-	chatService := ChatService{}
+	notification := NotificationFacade{}
 
 	title := "Design Patterns"
 	message := "DP are great if you plan to keep your code mainteinable"
 
-
-	smsGateway.send(SmsRequest{
+	notification.sendSms(Message{
 		phoneNumber: "12345",
 		message: message,
 	})
 
-	mailClient.sendMail(Mail{
+	notification.sendMail(Message{
 		mailAddress: "sebastian.malaca@mymail.com",
 		title: title,
-		content: message,
+		message: message,
 	})
 
-	chat := chatService.getFor(13)
-	chat.send(message)
+	notification.sendChatMessage(Message{
+		userId: 13,
+		message: message,
+	})
 }
