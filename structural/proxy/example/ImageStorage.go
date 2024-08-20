@@ -6,7 +6,12 @@ type ImageStorage struct {
 
 }
 
-func (storage *ImageStorage) load(fileName string, description string) string {
+func (storage *ImageStorage) load(fileName string, description string) Image {
 	fmt.Println("Loading image");
-	return fileName
+	
+	return &RealImage{
+		fileName: fileName,
+		description: description,
+		picture: Picture{name: fileName},
+	}
 }

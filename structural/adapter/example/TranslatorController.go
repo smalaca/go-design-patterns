@@ -6,7 +6,10 @@ type TranslatorController struct {
 
 func (controller *TranslatorController) change(language string) {
 	switch language {
-		case "DE": controller.translator = &DeutchTranslator{GermanDictionary{}}
+		case "EN":
+			controller.translator = &EnglishTranslator{GoogleTranslator{}}
+		case "DE":
+			controller.translator = &DeutschTranslator{GermanDictionary{}}
 	}
 }
 

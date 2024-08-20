@@ -5,17 +5,14 @@ import (
 )
 
 func Test_Bridge(t *testing.T) {
-	repositoryMongo := createMongoDbRepository(&InMemoryCache{})
+	repository := createMySqlRepository(&FileCache{})
 	entity := Entity{id: 13, name: "Lucky"}
 
-	repositoryMongo.save(entity)
-	
-	repositoryMysql := createMysqlDbRepository(&InMemoryCache{})
-	repositoryMysql.save(entity)
+	repository.save(entity)
 
-	// repository.findById(13)
-	// repository.findById(42)
+	repository.findById(13)
+	repository.findById(42)
 	
-	// repository.delete(13)
-	// repository.delete(42)
+	repository.delete(13)
+	repository.delete(42)
 }
