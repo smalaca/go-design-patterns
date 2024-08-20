@@ -5,10 +5,13 @@ import (
 )
 
 func Test_Bridge(t *testing.T) {
-	// repository := createMongoDbRepository(&InMemoryCache{})
-	// entity := Entity{id: 13, name: "Lucky"}
+	repositoryMongo := createMongoDbRepository(&InMemoryCache{})
+	entity := Entity{id: 13, name: "Lucky"}
 
-	// repository.save(entity)
+	repositoryMongo.save(entity)
+	
+	repositoryMysql := createMysqlDbRepository(&InMemoryCache{})
+	repositoryMysql.save(entity)
 
 	// repository.findById(13)
 	// repository.findById(42)
