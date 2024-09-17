@@ -12,7 +12,7 @@ func Test_State(t *testing.T) {
 		password: originPassword,
 		firstName: "Peter",
 		lastName: "Parker",
-		// state: &Active{},
+		state: &Active{},
 	}
 	
 	newPassword := "maybe less responsibility?"
