@@ -1,27 +1,34 @@
 package command
 
 type SuccessfulProductSaleProcess struct {
-	product Product
+	commands []Command
+
 }
 
-func createSuccessfulProductSaleProcess(product Product) SuccessfulProductSaleProcess {
+func createSuccessfulProductSaleProcess() SuccessfulProductSaleProcess {
 	return SuccessfulProductSaleProcess{
-		product: product,
+		commands: []Command{},
 	}
 }
 
 func (controller *SuccessfulProductSaleProcess) informWarehouse(warehouseId int) {
-
+	controller.commands = append(controller.commands, &InformWarehouseCommand{
+		warehouseId: warehouseId,
+	})
 }
 
 func (controller *SuccessfulProductSaleProcess) notifyCustomer(customer Customer) {
-
+	controller.commands = append(controller.commands, &NotifyCustomerCommand{
+		customer: customer,
+	})
 }
 
 func (controller *SuccessfulProductSaleProcess) createInvoice() {
-
+	controller.commands = append(controller.commands, &GenerateInvoiceCommand{})
 }
 
-func (controller *SuccessfulProductSaleProcess) execute() {
-
+func (controller *SuccessfulProductSaleProcess) execute(product Product) {
+	for _, command := range controller.commands {
+		command.execute(product)
+	}
 }

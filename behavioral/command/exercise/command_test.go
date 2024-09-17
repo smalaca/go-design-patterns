@@ -7,8 +7,9 @@ func Test_Command(t *testing.T) {
 		productId: 42,
 		name: "Design Patters Book",
 	}
-	controller := createSuccessfulProductSaleProcess(product)
+	controller := createSuccessfulProductSaleProcess()
 
+	// w momencie dodawania produktu, różne dla produktów
 	controller.informWarehouse(13)
 	controller.notifyCustomer(Customer{
 		customerId: 987,
@@ -16,5 +17,6 @@ func Test_Command(t *testing.T) {
 	})
 	controller.createInvoice()
 
-	controller.execute()
+	// po zakupie produktu
+	controller.execute(product)
 }
