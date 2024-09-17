@@ -1,6 +1,8 @@
 package templatemethod
 
-import "testing"
+import (
+	"testing"
+)
 
 func Test_TemplateMethod(t *testing.T) {
 	data := ReportData{}
