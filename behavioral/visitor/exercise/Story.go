@@ -6,3 +6,7 @@ type Story struct {
 	sprintId int
 	name string
 }
+
+func (story *Story) accept(visitor Visitor) {
+	visitor.visitStory(story)
+}

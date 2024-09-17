@@ -24,15 +24,15 @@ func Test_Visitor(t *testing.T) {
 		name: "Avengers",
 	}
 
-	// notificationVisitor := &NotificationVisitor{}
-	// statisticsVisitor := &StatisticsVisitor{}
+	notificationVisitor := &NotificationVisitor{}
+	statisticsVisitor := &StatisticsVisitor{}
 
-	// controller.register(notificationVisitor)
+	controller.register(notificationVisitor)
 	controller.processFor(task)
 	controller.processFor(story)
 	controller.processFor(project)
 
-	// controller.register(statisticsVisitor)
+	controller.register(statisticsVisitor)
 	controller.processFor(task)
 	controller.processFor(story)
 	controller.processFor(project)

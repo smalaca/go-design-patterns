@@ -5,3 +5,7 @@ type Project struct {
 	name        string
 	stakeholder string
 }
+
+func (project *Project) accept(visitor Visitor) {
+	visitor.visitProject(project)
+}

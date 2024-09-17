@@ -6,3 +6,7 @@ type Task struct {
 	assigneeId int
 	name string
 }
+
+func (task *Task) accept(visitor Visitor) {
+	visitor.visitTask(task)
+}
