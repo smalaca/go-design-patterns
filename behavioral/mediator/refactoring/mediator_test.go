@@ -12,11 +12,10 @@ func Test_Mediator(t *testing.T) {
 		accountHistory: *accountHistory,
 		accountService: *accountService,
 	}
-	// createAccountingMediator(accountHistory, accountService, securityService)
+	
+	mediator := createAccountingMediator(accountHistory, accountService, securityService)
 	controller := AccountController{
-		accountHistory: *accountHistory,
-		accountService: *accountService,
-		securityService: *securityService,
+		mediator: mediator,
 	}
 
 	controller.accept(42);
