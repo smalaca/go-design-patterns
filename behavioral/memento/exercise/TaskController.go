@@ -3,12 +3,14 @@ package memento
 import "fmt"
 
 type TaskController struct {
-	task Task
+	task      Task
+	snapshots []TaskMemento
 }
 
 func createTaskController(task Task) TaskController {
 	return TaskController{
-		task: task,
+		task:      task,
+		snapshots: []TaskMemento{},
 	}
 }
 
@@ -29,17 +31,18 @@ func (controller *TaskController) changeAcceptanceCriteria(acceptanceCriteria st
 }
 
 func (controller *TaskController) save() {
-
+	controller.snapshots = append(controller.snapshots, controller.task.createMemento())
 }
 
 func (controller *TaskController) revertChange() {
-
+	snapshot := controller.popLastSnapshot(&controller.snapshots)
+	controller.task.apply(snapshot)
 }
 
-// func (controller *TaskController) popLastSnapshot(snapshots *[]TaskMemento) TaskMemento {
-// 	f := len(*snapshots)
-// 	lastSnapshot := (*snapshots)[f-1]
-// 	*snapshots = (*snapshots)[:f-1]
+func (controller *TaskController) popLastSnapshot(snapshots *[]TaskMemento) TaskMemento {
+	f := len(*snapshots)
+	lastSnapshot := (*snapshots)[f-1]
+	*snapshots = (*snapshots)[:f-1]
 
-// 	return lastSnapshot
-// }
+	return lastSnapshot
+}

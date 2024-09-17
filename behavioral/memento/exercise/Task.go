@@ -20,6 +20,20 @@ func (task *Task) summary() string {
 		"]"
 }
 
+func (task *Task) createMemento() TaskMemento {
+	return TaskMemento{
+		name:               task.name,
+		description:        task.description,
+		acceptanceCriteria: task.acceptanceCriteria,
+	}
+}
+
+func (task *Task) apply(memento TaskMemento) {
+	task.name = memento.name
+	task.description = memento.description
+	task.acceptanceCriteria = memento.acceptanceCriteria
+}
+
 func (task *Task) changeName(name string) {
 	task.name = name
 }
