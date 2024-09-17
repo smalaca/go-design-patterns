@@ -10,11 +10,10 @@ func Test_Iterator(t *testing.T) {
 
 	componentsGroup := controller.findOnAzureFor("Online Shop")
 
-	fmt.Println(componentsGroup)
-	// iterator := componentsGroup.iterator()
+	iterator := componentsGroup.iterator()
 
-	// for iterator.hasNext() {
-	// 	componentName := iterator.getNext()
-	// 	fmt.Println(componentName)
-	// }
+	for iterator.hasNext() {
+		componentName := iterator.getNext()
+		fmt.Println(componentName)
+	}
 }
