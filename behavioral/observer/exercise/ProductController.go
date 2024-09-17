@@ -3,10 +3,11 @@ package observer
 import "strconv"
 
 type ProductController struct {
+	observers []Observer
 }
 
 func createProductController() ProductController {
-	return ProductController{}
+	return ProductController{observers: []Observer{}}
 }
 
 func (controller *ProductController) buy(productId int) {
@@ -29,18 +30,28 @@ func (controller *ProductController) findById(productId int) Product {
 }
 
 func (controller *ProductController) notifyAll(product Product) {
-
+	for _, observer := range controller.observers {
+		observer.notify(product)
+	}
 }
 
-// func (controller *ProductController) unregisterObserver(observers []Observer, toRemove Observer) []Observer {
-// 	length := len(observers)
+func (controller *ProductController) register(observer Observer) {
+	controller.observers = append(controller.observers, observer)
+}
 
-// 	for i, observer := range observers {
-// 		if toRemove.name() == observer.name() {
-// 			observers[length-1], observers[i] = observers[i], observers[length-1]
-// 			return observers[:length-1]
-// 		}
-// 	}
+func (controller *ProductController) unregister(observer Observer) {
+	controller.observers = controller.unregisterObserver(controller.observers, observer)
+}
 
-// 	return observers
-// }
+func (controller *ProductController) unregisterObserver(observers []Observer, toRemove Observer) []Observer {
+	length := len(observers)
+
+	for i, observer := range observers {
+		if toRemove.name() == observer.name() {
+			observers[length-1], observers[i] = observers[i], observers[length-1]
+			return observers[:length-1]
+		}
+	}
+
+	return observers
+}
