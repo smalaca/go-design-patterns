@@ -15,6 +15,7 @@ func Test_Memento(t *testing.T) {
 
 	controller := createTaskController(task)
 	controller.save()
+	controller.displayTask()
 
 	controller.changeName("Something name")
 	controller.changeDescription("Another description")
