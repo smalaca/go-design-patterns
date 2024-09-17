@@ -13,7 +13,12 @@ func createPriceController() PriceController {
 }
 
 func (controller *PriceController) priceFor(price int, customer Customer) int {
-	return price
+	expression := controller.priceRulesFactory.raw()
+	expression = controller.priceRulesFactory.latePayment(price, expression)
+	expression = controller.priceRulesFactory.vipPrice(expression)
+	expression = controller.priceRulesFactory.holiday(controller.isHolidaySeason, expression)
+
+	return expression.calculate(price, customer)
 }
 
 func (controller *PriceController) setHolidays(isHolidaySeason bool) {
