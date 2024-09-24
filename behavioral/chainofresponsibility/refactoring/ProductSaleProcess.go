@@ -1,29 +1,21 @@
 package chainofresponsibility
 
+import "fmt"
+
 type ProductSaleProcess struct {
-	processingStep ProcessingStep
+	customer Customer
+	product Product
 }
 
 func createProductSaleProcess(customer Customer, product Product) ProductSaleProcess {
-	invoiceStep := &InvoiceGenerationStep{
-		product: product,
-		customer: customer,
-	}
-	paymentStep := &PaymentStep{
-		product: product,
-		customer: customer,
-		next: invoiceStep,
-	}
-	blockProductStep := &BlockProductStep{
-		product: product,
-		next: paymentStep,
-	}
-
 	return ProductSaleProcess{
-		processingStep: blockProductStep,
+		customer: customer,
+		product: product,
 	}
 }
 
 func (process *ProductSaleProcess) buy() {
-	process.processingStep.execute()
+	fmt.Println("Blocking product: " + process.product.name)
+	fmt.Println("Payment for product: " + process.product.name + " by customer: " + process.customer.mail)
+	fmt.Println("Generating invoice for selling product: " + process.product.name + " for customer: " + process.customer.mail)
 }
